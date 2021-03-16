@@ -120,10 +120,10 @@ function generate_outputs_list() {
   # python3 -V
   # python -m pip list
   # echo "===="
-  # python3 -m pip list
   # echo "===="
   echo "IN BASH"
   pwd
+  python3 -m pip list
   python3 -c "import sapporo; print(sapporo.__file__)"
   python3 -c "from sapporo.util import dump_outputs_list; dump_outputs_list('${run_dir}')" || executor_error
 }

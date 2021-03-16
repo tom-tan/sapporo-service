@@ -172,12 +172,13 @@ def fork_run(run_id: str) -> None:
     print(os.getcwd())
     import sapporo
     print(sapporo.__file__)
-    os.chdir(run_dir)
+    # os.chdir(run_dir)
     cmd: str = f"/bin/bash {current_app.config['RUN_SH']} {run_dir}"
     write_file(run_id, "state", State.QUEUED.name)
     with stdout.open(mode="w", encoding="utf-8") as f_stdout, \
             stderr.open(mode="w", encoding="utf-8") as f_stderr:
-        process = Popen(shlex.split(cmd), stdout=f_stdout, stderr=f_stderr)
+        process = Popen(shlex.split(cmd),
+                        stdout=f_stdout, stderr=f_stderr, cwd=run_dir)
     pid: Optional[int] = process.pid
     if pid is not None:
         write_file(run_id, "pid", str(pid))

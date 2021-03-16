@@ -48,7 +48,8 @@ def setup_test_server() -> Generator[None, None, None]:
                                     "--master --need-app --single-interpreter "
                                     "--enable-threads --die-on-term --vacuum"),
                         env={"SAPPORO_DEBUG": str(True),
-                             "SAPPORO_RUN_DIR": str(tempdir)},
+                             "SAPPORO_RUN_DIR": str(tempdir),
+                             "PATH": os.environ.get("PATH")},
                         encoding="utf-8",
                         stdout=sp.PIPE, stderr=sp.PIPE)
     else:
@@ -62,7 +63,8 @@ def setup_test_server() -> Generator[None, None, None]:
                         env={"SAPPORO_HOST": str(TEST_HOST),
                              "SAPPORO_PORT": str(TEST_PORT),
                              "SAPPORO_DEBUG": str(True),
-                             "SAPPORO_RUN_DIR": str(tempdir)},
+                             "SAPPORO_RUN_DIR": str(tempdir),
+                             "PATH": os.environ.get("PATH")},
                         encoding="utf-8",
                         stdout=sp.PIPE, stderr=sp.PIPE)
     sleep(3)

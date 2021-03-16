@@ -178,6 +178,8 @@ def fork_run(run_id: str) -> None:
     with stdout.open(mode="w", encoding="utf-8") as f_stdout, \
             stderr.open(mode="w", encoding="utf-8") as f_stderr:
         process = Popen(shlex.split(cmd),
+                        env={"PATH": os.environ.get("PATH")},
+                        encoding="utf-8",
                         stdout=f_stdout, stderr=f_stderr, cwd=run_dir)
     pid: Optional[int] = process.pid
     if pid is not None:

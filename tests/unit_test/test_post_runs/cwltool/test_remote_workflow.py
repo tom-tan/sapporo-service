@@ -56,7 +56,7 @@ def test_remote_workflow(setup_test_server: None) -> None:
 
     from .. import get_run_id_status
     count = 0
-    while count <= 120:
+    while count <= 30:
         sleep(3)
         get_status_data = get_run_id_status(run_id)
         if str(get_status_data["state"]) in \

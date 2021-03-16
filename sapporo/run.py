@@ -168,6 +168,10 @@ def fork_run(run_id: str) -> None:
     run_dir: Path = get_run_dir(run_id)
     stdout: Path = get_path(run_id, "stdout")
     stderr: Path = get_path(run_id, "stderr")
+    print("IN PYTHON")
+    print(os.getcwd())
+    import sapporo
+    print(sapporo.__file__)
     cmd: str = f"/bin/bash {current_app.config['RUN_SH']} {run_dir}"
     write_file(run_id, "state", State.QUEUED.name)
     with stdout.open(mode="w", encoding="utf-8") as f_stdout, \

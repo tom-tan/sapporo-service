@@ -132,7 +132,7 @@ def dump_outputs_list(inputted_run_dir: str) -> None:
 
 
 def walk_all_files(dir: Path) -> Iterable[Path]:
-    for root, dirs, files in os.walk(dir):
+    for root, _dirs, files in os.walk(dir):
         for file in files:
             yield Path(root).joinpath(file)
 

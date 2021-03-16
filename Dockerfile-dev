@@ -16,8 +16,8 @@ RUN chmod +x /usr/bin/curl && \
 
 WORKDIR /app
 COPY . .
-RUN pip install --no-cache-dir --progress-bar off -U pip setuptools wheel && \
-    pip install --no-cache-dir --progress-bar off -e .[tests]
+RUN python3 -m pip install --no-cache-dir --progress-bar off -U pip setuptools wheel && \
+    python3 -m pip install --no-cache-dir --progress-bar off -e .[tests]
 
 ENV SAPPORO_HOST 0.0.0.0
 ENV SAPPORO_PORT 1122

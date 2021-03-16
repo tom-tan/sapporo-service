@@ -122,7 +122,10 @@ function generate_outputs_list() {
   # echo "===="
   # python3 -m pip list
   # echo "===="
-  python3 -c "from sapporo.util import dump_outputs_list; dump_outputs_list('${run_dir}')"
+  echo "IN BASH"
+  pwd
+  python3 -c "import sapporo; print(sapporo.__file__)"
+  python3 -c "from sapporo.util import dump_outputs_list; dump_outputs_list('${run_dir}')" || executor_error
 }
 
 function upload() {

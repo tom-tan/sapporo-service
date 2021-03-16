@@ -30,9 +30,11 @@ def delete_env_vars(monkeypatch: MonkeyPatch) -> None:
 
 @pytest.fixture()
 def setup_test_server() -> Generator[None, None, None]:
-    tempdir = tempfile.mkdtemp()
-    os.environ.set("RUN_DIR", "tempdir")
-    print(tempdir)
+    # tempdir = tempfile.mkdtemp()
+    tempdir = "/tmp/foobar"
+    Path(tempdir).mkdir(parents=True)
+    # os.environ.set("RUN_DIR", "tempdir")
+    # print(tempdir)
     if environ.get("TEST_SERVER_MODE", "uwsgi") == "uwsgi":
         pre_proc = sp.run("which uwsgi", shell=True,
                           encoding="utf-8", stdout=sp.PIPE, stderr=sp.PIPE)

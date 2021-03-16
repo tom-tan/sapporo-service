@@ -64,9 +64,9 @@ def test_remote_workflow(setup_test_server: None) -> None:
             break
         count += 1
     print(get_status_data)
-    run_dir = os.environ.get("RUN_DIR")
+    # run_dir = os.environ.get("RUN_DIR")
     from pathlib import Path
-    p = Path(run_dir).joinpath(run_id[:2]).joinpath(run_id)
+    p = Path("/tmp/foobar").joinpath(run_id[:2]).joinpath(run_id)
     with p.joinpath("stdout.log").open(mode="r") as f:
         print(f.read())
     with p.joinpath("stderr.log").open(mode="r") as f:

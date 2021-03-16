@@ -62,6 +62,7 @@ def test_remote_workflow(setup_test_server: None) -> None:
                 ["COMPLETE", "EXECUTOR_ERROR", "SYSTEM_ERROR", "CANCELED"]:
             break
         count += 1
+    print(get_status_data)
     assert str(get_status_data["state"]) == "COMPLETE"
 
     from .. import get_run_id

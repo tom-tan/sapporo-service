@@ -31,10 +31,12 @@ def delete_env_vars(monkeypatch: MonkeyPatch) -> None:
 @pytest.fixture()
 def setup_test_server() -> Generator[None, None, None]:
     tempdir = tempfile.mkdtemp()
+    print(tempdir)
     if environ.get("TEST_SERVER_MODE", "uwsgi") == "uwsgi":
         pre_proc = sp.run("which uwsgi", shell=True,
                           encoding="utf-8", stdout=sp.PIPE, stderr=sp.PIPE)
         uwsgi_path = pre_proc.stdout.strip()
+        print(uwsgi_path)
         proc = sp.Popen(shlex.split(f"{uwsgi_path} "
                                     f"--http {TEST_HOST}:{TEST_PORT} "
                                     f"--chdir {str(ROOT_DIR)} "
@@ -50,6 +52,7 @@ def setup_test_server() -> Generator[None, None, None]:
         pre_proc = sp.run("which sapporo", shell=True,
                           encoding="utf-8", stdout=sp.PIPE, stderr=sp.PIPE)
         sapporo_path = pre_proc.stdout.strip()
+        print(sapporo_path)
         proc = sp.Popen(shlex.split(f"{sapporo_path} "
                                     f"--host {TEST_HOST} --port {TEST_PORT} "
                                     f"--run-dir {tempdir} "),
@@ -66,6 +69,9 @@ def setup_test_server() -> Generator[None, None, None]:
             f"Failed to start the test server.\n{str(stderr)}")
     yield
     os.kill(proc.pid, signal.SIGTERM)
+    print(proc.communicate())
+    print(proc.stdout)
+    print(proc.stderr)
     sleep(3)
     try:
         shutil.rmtree(tempdir)

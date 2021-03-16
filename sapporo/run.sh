@@ -31,8 +31,10 @@ function run_wf() {
 }
 
 function run_cwltool() {
+  echo "RUN CWLToOL"
   local container="commonworkflowlanguage/cwltool:1.0.20191225192155"
   local cmd_txt="${DOCKER_CMD} ${container} --outdir ${outputs_dir} ${wf_engine_params} ${wf_url} ${wf_params} 1>${stdout} 2>${stderr}"
+  echo "${cmd_txt}"
   echo ${cmd_txt} >${cmd}
   eval ${cmd_txt} || executor_error
 }

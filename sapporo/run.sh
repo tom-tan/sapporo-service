@@ -113,16 +113,16 @@ function cancel_cwltool() {
 }
 
 function generate_outputs_list() {
-  echo "===="
-  which python
-  which python3
-  python -V
-  python3 -V
-  python -m pip list
-  echo "===="
-  python3 -m pip list
-  echo "===="
-  # python3 -c "from sapporo.util import dump_outputs_list; dump_outputs_list('${run_dir}')"
+  # echo "===="
+  # which python
+  # which python3
+  # python -V
+  # python3 -V
+  # python -m pip list
+  # echo "===="
+  # python3 -m pip list
+  # echo "===="
+  python3 -c "from sapporo.util import dump_outputs_list; dump_outputs_list('${run_dir}')"
 }
 
 function upload() {

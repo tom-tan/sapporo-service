@@ -123,8 +123,10 @@ function generate_outputs_list() {
   # echo "===="
   echo "IN BASH"
   pwd
+  which python3
+  python3 -c "import sys; print(sys.path)"
   python3 -m pip list
-  python3 -c "import sapporo; print(sapporo.__file__)"
+  python3 -c "import sapporo; print(sapporo.__file__)" || executor_error
   python3 -c "from sapporo.util import dump_outputs_list; dump_outputs_list('${run_dir}')" || executor_error
 }
 

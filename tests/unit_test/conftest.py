@@ -31,6 +31,7 @@ def delete_env_vars(monkeypatch: MonkeyPatch) -> None:
 @pytest.fixture()
 def setup_test_server() -> Generator[None, None, None]:
     tempdir = tempfile.mkdtemp()
+    os.environ.set("RUN_DIR", "tempdir")
     print(tempdir)
     if environ.get("TEST_SERVER_MODE", "uwsgi") == "uwsgi":
         pre_proc = sp.run("which uwsgi", shell=True,
@@ -70,8 +71,7 @@ def setup_test_server() -> Generator[None, None, None]:
     yield
     os.kill(proc.pid, signal.SIGTERM)
     print(proc.communicate())
-    print(proc.stdout)
-    print(proc.stderr)
+
     sleep(3)
     try:
         shutil.rmtree(tempdir)
